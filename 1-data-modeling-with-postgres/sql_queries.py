@@ -9,7 +9,7 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 # CREATE TABLES
 
 songplay_table_create = ("""
-    CREATE TABLE songplays (songplay_id serial primary key, start_time bigint NOT NULL, user_id int NOT NULL, level varchar, song_id varchar, artist_id varchar, session_id int, location varchar, user_agent varchar)
+    CREATE TABLE songplays (songplay_id serial primary key, start_time timestamp NOT NULL, user_id int NOT NULL, level varchar, song_id varchar, artist_id varchar, session_id int, location varchar, user_agent varchar)
 """)
 
 user_table_create = ("""
@@ -31,7 +31,7 @@ time_table_create = ("""
 # INSERT RECORDS
 
 songplay_table_insert = ("""
-   INSERT INTO songplays (songplay_id, start_time, user_id, level, song_id, artist_id, session_id, location, user_agent) values (DEFAULT, %s, %s, %s, %s, %s, %s, %s, %s) ON CONFLICT DO NOTHING
+   INSERT INTO songplays (songplay_id, start_time, user_id, level, song_id, artist_id, session_id, location, user_agent) values (DEFAULT, to_timestamp(%s), %s, %s, %s, %s, %s, %s, %s) ON CONFLICT DO NOTHING
 """)
 
 user_table_insert = ("""
